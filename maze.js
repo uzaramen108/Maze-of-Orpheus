@@ -5,7 +5,6 @@
         let bombnum = 3; //폭탄 수
         let shovelnum = 0; //삽 수
         let snacknum = 3; //간식 수
-        let noroi = 0;
         let hpadjust = 0.1;
         let sandnum = 0;
         let stopgamenum = 0;
@@ -112,7 +111,7 @@
                 randconfuse = 0.1;
                 hpadjust = 0.1;
             } else if (stagenum ==0) {
-                randwall = 0.3;
+                randwall = 0.34;
                 randgreen = 0.05;
                 randblue = 0.08;
                 randbomb = 0.1;
@@ -178,6 +177,7 @@
             defineVariable(stagenum);
             showStagePopup(stagenum);
             updateHelpMessages(stagenum);
+            confusenum = 0;
             for (let row = 0; row < virtualMazeSize; row++) {
                 maze[row] = [];
                 for (let col = 0; col < virtualMazeSize; col++) {
@@ -342,7 +342,6 @@
                 } else if (maze[newY][newX] === 'stair') {
                     stagenum += 1;
                     health += 50;
-                    noroi = 0;
                     sandnum = 0;
                     updateResourceDisplay();
                     createVirtualMaze();
@@ -367,8 +366,6 @@
                     if (sandnum > 4) {
                         alert("유사에 몸이 휩쓸려버렸다!")
                         stagenum = stagenum - 1;
-                        health += 50;
-                        noroi = 0;
                         createVirtualMaze(); // Regenerate the maze
                         sandnum = 0;
                     } else {
@@ -386,7 +383,6 @@
                     } else if (stagenum == 0) {
                         stagenum = 7;
                         health = 100;
-                        noroi = 0;
                         sandnum = 0;
                         endingcount = 2;
                         createVirtualMaze();
@@ -470,7 +466,6 @@
                     } 
                     stagenum -= 1;
                     health += 50;
-                    noroi = 0;
                     sandnum = 0;
                     
                     createVirtualMaze();
@@ -631,10 +626,12 @@
         const healthBar = document.getElementById('healthBar');
 
         function updateHealth() {
-            health -= hpadjust * (1 + 5 * noroi); // Decrease health by 1 per second
+            health -= hpadjust; // Decrease health by 1 per second
             if (health < 0) {
                 health = 0;
                 gameover();
+            } else if (health > 151) {
+                health = 150;
             } // Prevent health from going negative
 
             // Update the health bar width
@@ -668,7 +665,6 @@
             bombnum = 3; //폭탄 수
             shovelnum = 0; //삽 수
             nacknum = 3; //간식 수
-            noroi = 0;
             hpadjust = 1;
             sandnum = 0;
             updateResourceDisplay();
@@ -696,7 +692,6 @@
             bombnum = 3; // 폭탄 수
             shovelnum = 0; // 삽 수
             snacknum = 3; // 간식 수
-            noroi = 0;
             health = 100;
             hpadjust = 1;
             sandnum = 0;
@@ -771,14 +766,13 @@
                     "조작 방법은 W,A,S,D입니다.",
                     "초록색 타일을 밟는다면 두 칸 앞에 벽이 설치됩니다.",
                     "파랑색 타일을 밟는다면 당신의 주위로 벽이 반전됩니다.",
+                    "쉽게 말해 벽이 있다면 사라지고, 없다면 생겨납니다.",
                     "폭탄은 q키로 사용합니다. 당신 주위의 벽들을 없애버리죠.",
                     "지쳤다면 간식이라도 먹는게 어떨까요? e키를 사용해서요.",
                     "밖으로 나가는 계단은 귀퉁이에 위치해있습니다."
                 ];
             } else if (stagenum == 2) {
                 helpMessages = [
-                    "에우리디케를 데리고 밖으로 나가야 합니다!",
-                    "에우리디케를 보기 위해 뒤돌아봐선 안됩니다!",
                     "저기 폭탄이 떨어져있네요. 빨간색 타일 안보이시나요?",
                     "초록색 타일을 밟는다면 두 칸 앞에 벽이 설치됩니다.",
                     "파랑색 타일을 밟는다면 당신의 주위로 벽이 반전됩니다.",
@@ -797,7 +791,8 @@
                     "바닥에 모래들이 깔려있네요. 유용한 도구들을 발견할수도...",
                     "짙은 색의 모래는 보기보다 깊은 듯 합니다.",
                     "r키로 삽을 사용한다면 아래층으로 이동할 수 있습니다.",
-                    "위급한 상황에 삽을 사용해보세요."
+                    "위급한 상황에 삽을 사용해보세요.",
+                    "만약 상황이 안좋으면 일부러 유사를 밟는것도 방법입니다."
                 ];
             } else if (stagenum == 5) {
                 helpMessages = [
@@ -859,7 +854,7 @@
 
             // 10초마다 메시지 변경
             clearInterval(displayHelpMessages.interval); // 기존의 interval을 먼저 지워서 중복 실행 방지
-            displayHelpMessages.interval = setInterval(showNextMessage, 10000);
+            displayHelpMessages.interval = setInterval(showNextMessage, 5000);
 
             // 처음 메시지부터 표시
             showNextMessage();
