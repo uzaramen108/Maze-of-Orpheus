@@ -98,7 +98,7 @@
                 randblue = 0.2;
                 randbomb = 0.05;
                 randsand = 0;
-                randtrap = 0;
+                randtrap = 0.1;
                 randconfuse = 0.05;
                 hpadjust = 1.1;
             } else if (stagenum ==7) {
