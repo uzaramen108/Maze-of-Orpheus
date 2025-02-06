@@ -699,7 +699,6 @@
             playerPosition.y = 90;
         
             updateResourceDisplay()
-            updateHealth();
             createVirtualMaze();
             renderView();
         }
