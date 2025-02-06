@@ -665,7 +665,7 @@
             bombnum = 3; //폭탄 수
             shovelnum = 0; //삽 수
             nacknum = 3; //간식 수
-            hpadjust = 1;
+            hpadjust = 0;
             sandnum = 0;
             updateResourceDisplay();
             updateHealth();
@@ -693,7 +693,7 @@
             shovelnum = 0; // 삽 수
             snacknum = 3; // 간식 수
             health = 100;
-            hpadjust = 1;
+            hpadjust = 0;
             sandnum = 0;
             playerPosition.x = 90;
             playerPosition.y = 90;
