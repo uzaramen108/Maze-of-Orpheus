@@ -11,6 +11,7 @@
         let confusenum = 0;
         let endingcount = 0;
         let nowife = 0;
+        let papernum = 0;
 
         // Player's initial position in the virtual maze
         const playerPosition = { x: 90, y: 90 };
@@ -98,7 +99,7 @@
                 randblue = 0.2;
                 randbomb = 0.05;
                 randsand = 0;
-                randtrap = 0.1;
+                randtrap = 0;
                 randconfuse = 0.05;
                 hpadjust = 1.1;
             } else if (stagenum ==7) {
@@ -348,8 +349,13 @@
                     
                      // Show popup instead of alert
                 } else if (maze[newY][newX] === 'wife') {
+                    if (papernum > 0) {
+                        papernum = papernum - 1;
+                        alert("부적은 불타 사라졌다!");
+                    } else {
+                        showImageForTwoSeconds('./img/damn.png');
+                    }
                     
-                    showImageForTwoSeconds('./img/damn.png');
                 } else if (maze[newY][newX] === 'path-sand') {
                     if (Math.random() < 0.015) {
                         alert("모래 속에서 폭탄을 1개 주웠다.");
@@ -360,6 +366,9 @@
                     } else if (Math.random() < 0.006) {
                         alert("모래 속에서 삽을 1개 주웠다.");
                         shovelnum =  shovelnum + 1;
+                    } else if (Math.random() < 0.003) {
+                        alert("모래 속에서 불가사의의 부적을 1개 주웠다.");
+                        papernum = papernum + 1;
                     } 
                     updateResourceDisplay();
                 } else if (maze[newY][newX] === 'flowsand') {
@@ -665,8 +674,10 @@
             bombnum = 3; //폭탄 수
             shovelnum = 0; //삽 수
             nacknum = 3; //간식 수
-            hpadjust = 0;
+            hpadjust = 1;
             sandnum = 0;
+            papernum = 1;
+
             updateResourceDisplay();
             updateHealth();
             createVirtualMaze();
@@ -693,12 +704,14 @@
             shovelnum = 0; // 삽 수
             snacknum = 3; // 간식 수
             health = 100;
-            hpadjust = 0;
+            hpadjust = 1;
             sandnum = 0;
+            papernum = 0;
             playerPosition.x = 90;
             playerPosition.y = 90;
         
             updateResourceDisplay()
+            updateHealth();
             createVirtualMaze();
             renderView();
         }
