@@ -525,10 +525,12 @@
             const bombDisplay = document.getElementById('bombDisplay');
             const shovelDisplay = document.getElementById('shovelDisplay');
             const snackDisplay = document.getElementById('snackDisplay');
+            const paperDisplay = document.getElementById('paperDisplay');
         
             bombDisplay.textContent = `Bombs: ${bombnum}`;
             shovelDisplay.textContent = `Shovels: ${shovelnum}`;
             snackDisplay.textContent = `Snacks: ${snacknum}`;
+            paperDisplay.textContent = `bujuk: ${papernum}`;
         }
         
         // Update all displays (stage and resources)
