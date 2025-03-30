@@ -9,17 +9,20 @@
 <body>
     <div class="popup">
         게임종료
-        <button class="restart">다시시작</button>
+        <button class="restart">RESTART</button>
     </div>
     <div class="ending">
         <h1>The End</h1><br/>
         <h6>오르페우스는 에우리디케의 발이 지옥에 걸쳐 있음을 알지 못했다.</h6>
-        <button class="restart">다시시작</button>
+        <button class="restart">RESTART</button>
     </div>
     <div class="hending">
         <h1>The End</h1><br/>
         <h6>플레이해주셔서 감사합니다.</h6>
-        <button class="restart">다시시작</button>
+        <button class="restart">RESTART</button>
+    </div>
+    <div class="game-container">
+        <table id="gameTable"></table>
     </div>
     <div id="firstPopup" class="first-popup">
         <h1>Maze of Orpheus</h1>
@@ -30,9 +33,6 @@
             삽: R
         </h6>
         <button class="start">START</button>
-    </div>
-    <div class="game-container">
-        <table id="gameTable"></table>
     </div>
     <div id="stagePopup" class="stage-popup">
         <div class="stage-popup-content">
@@ -48,6 +48,7 @@
             <div id="bombDisplay">Bombs: 3</div>
             <div id="shovelDisplay">Shovels: 0</div>
             <div id="snackDisplay">Snacks: 3</div>
+            <div id="paperDisplay">bujuks: 3</div>
         </div>
     </div>
     <div id="helpPanel" class="help-panel">
